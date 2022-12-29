@@ -1,0 +1,87 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>  
+<!--       
+<script>         
+$(document).ready(function(){
+    $("button").click(function(){    
+        //alert("The button was clicked.");              
+        $.ajax({                     
+            type: "GET",                     
+            url: 'https://1dsjr25xvh.execute-api.us-east-1.amazonaws.com/v1',
+            crossDomain: true,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            success: function(result){ 
+                alert(result.httpMethod);   
+            },                     
+            error: function(error){
+                alert(`Error: ${error}`)
+            }
+        })
+    })
+});
+</script>
+<script>
+$(document).ready(function(){
+    $("p").click(function(){
+    alert("The paragraph was clicked.");
+    });
+});
+</script>
+-->
+
+<script>         
+    $(document).ready(function(){
+        $("button").click(function(){    
+            //alert("The button was clicked.");    
+            var name = document.getElementById("name").value,                     
+            email = document.getElementById("email").value,                     
+            message = document.getElementById("message").value;
+            console.log(name);
+            $.ajax({                     
+                type: "POST",                     
+                url: 'https://1dsjr25xvh.execute-api.us-east-1.amazonaws.com/v1',
+                crossDomain: true,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: JSON.stringify(
+                    {
+                        'user_info': {
+                            'name': name,                         
+                            'email': email,                         
+                            'message': message  
+                        }                                          
+                    }
+                ),
+                success: function(result){ 
+                    alert(result.response);   
+                },                     
+                error: function(error){
+                    console.log(name);
+                    alert(`Error: ${error}`)
+                }
+            })
+        })
+    });
+</script>
+
+
+<!--THIS IS WHERE DATA IS PULLED FROM S3 TO API TO LAMBDA TO SES-->
+<p>Click on this paragraph.</p>
+
+<div class="form-label-group"> 
+<input type="text" id="name" class="form-control" placeholder="Name" required> 
+<label for="name" class="control-label">Name</label> 
+</div> 
+<div class="form-label-group"> 
+<input type="text" id="email" class="form-control" placeholder="Email" required> 
+<label for="email" class="control-label">Email address</label> </div> 
+<div class="form-label-group"> 
+<textarea id="message" name="message" rows="3" class="form-control" placeholder="Message"></textarea>
+<label for="message" class="control-label">Message</label> </div> 
+</div> 
+<div id="form-response"></div> 
+<button class="btn btn-lg btn-primary btn-block" id="submit" type="submit" style="background-color:rgb(198, 200, 202);">Do Something</button>
+</html>
