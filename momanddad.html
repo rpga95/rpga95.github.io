@@ -183,6 +183,41 @@
             to { transform: rotate(360deg); }
         }
 
+        .orientation-message {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(74, 69, 32, 0.98);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+            pointer-events: none;
+        }
+
+        .orientation-message p {
+            font-size: 1.5em;
+            color: #f4d4a8;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin: 20px 0;
+        }
+
+        .orientation-message .emoji {
+            font-size: 4em;
+            margin: 20px 0;
+            animation: rotate 2s linear infinite;
+        }
+
+        @media (max-width: 768px) and (orientation: portrait) {
+            .orientation-message {
+                display: flex;
+            }
+        }
+
         @media (max-width: 768px) {
             .main-content {
                 padding: 30px 15px;
@@ -285,6 +320,11 @@
 <body>
     <div class="hearts-background" id="heartsBackground"></div>
     <div class="confetti-container" id="confettiContainer"></div>
+    <div class="orientation-message" id="orientationMessage">
+        <div class="emoji">📱</div>
+        <p>Please turn your phone sideways</p>
+        <p>to enjoy this page!</p>
+    </div>
 
     <div class="main-content">
         <h1>Happy 33rd Anniversary!</h1>
@@ -300,6 +340,27 @@
     </div>
 
     <script>
+        // Handle orientation detection for mobile
+        function handleOrientationChange() {
+            const orientationMessage = document.getElementById('orientationMessage');
+            const isMobile = window.innerWidth <= 768;
+            const isPortrait = window.matchMedia('(orientation: portrait)').matches;
+            
+            if (isMobile && isPortrait) {
+                orientationMessage.style.display = 'flex';
+            } else {
+                orientationMessage.style.display = 'none';
+            }
+        }
+
+        // Listen for orientation changes
+        window.addEventListener('orientationchange', handleOrientationChange);
+        window.addEventListener('resize', handleOrientationChange);
+        
+        // Check on initial load
+        window.addEventListener('load', handleOrientationChange);
+        handleOrientationChange();
+
         // Image list from the momanddad folder
         const images = [
             'assets/img/momanddad/IMG_3702.heic',
