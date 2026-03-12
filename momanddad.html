@@ -184,26 +184,100 @@
         }
 
         @media (max-width: 768px) {
+            .main-content {
+                padding: 30px 15px;
+            }
+
             h1 {
-                font-size: 2.5em;
+                font-size: 2.2em;
+                margin-bottom: 8px;
             }
 
             .subtitle {
-                font-size: 1.5em;
+                font-size: 1.3em;
+                margin-bottom: 15px;
             }
 
             .date-location {
-                font-size: 1.1em;
+                font-size: 1em;
+                margin-bottom: 25px;
             }
 
             .message {
-                font-size: 1em;
+                font-size: 0.95em;
                 padding: 20px;
+                margin-bottom: 40px;
+                line-height: 1.6;
             }
 
             .photo-collage {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-                gap: 10px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+                max-width: 100%;
+                margin: 30px auto;
+            }
+
+            .celebration-button {
+                margin-top: 30px;
+                padding: 12px 30px;
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 20px 10px;
+                min-height: auto;
+                justify-content: flex-start;
+                padding-top: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 5px;
+            }
+
+            .subtitle {
+                font-size: 1.1em;
+                margin-bottom: 10px;
+            }
+
+            .date-location {
+                font-size: 0.9em;
+                margin-bottom: 20px;
+            }
+
+            .message {
+                font-size: 0.9em;
+                padding: 15px;
+                margin-bottom: 30px;
+                max-width: 100%;
+            }
+
+            .message p {
+                margin: 0;
+            }
+
+            .message p:not(:first-child) {
+                margin-top: 10px !important;
+            }
+
+            .photo-collage {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+                max-width: 100%;
+                margin: 20px auto;
+                padding: 0 5px;
+            }
+
+            .photo-item {
+                border-width: 2px;
+            }
+
+            .celebration-button {
+                margin-top: 20px;
+                padding: 10px 25px;
+                font-size: 0.95em;
             }
         }
     </style>
@@ -222,7 +296,7 @@
 
         <div class="photo-collage" id="photoCollage"></div>
 
-        <button class="celebration-button" onclick="celebrate()">Celebrate with Me! 🎊</button>
+        <button class="celebration-button" onclick="celebrate()">Celebrate! 🎊</button>
     </div>
 
     <script>
@@ -284,7 +358,7 @@
         // Create champagne glass animations
         function createChampagneGlasses() {
             const container = document.body;
-            const glassCount = 6;
+            const glassCount = window.innerWidth < 768 ? 3 : 6;
             
             for (let i = 0; i < glassCount; i++) {
                 const glass = document.createElement('div');
