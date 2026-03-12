@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 33rd Anniversary!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes:wght@400&family=Playfair+Display:wght@700&family=Lora:wght@400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #4a4520 0%, #6b6440 50%, #8b8560 100%);
+            font-family: 'Lora', serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .confetti-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+        }
+
+        .champagne-glass {
+            position: fixed;
+            font-size: 3em;
+            pointer-events: none;
+            animation: clinkAnimation 3s ease-in-out infinite;
+        }
+
+        @keyframes clinkAnimation {
+            0%, 100% {
+                transform: translateX(-5px) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(5px) rotate(5deg);
+                opacity: 0.9;
+            }
+        }
+
+        .main-content {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4em;
+            color: #f4d4a8;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: #e8c17e;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            font-weight: 700;
+        }
+
+        .date-location {
+            font-size: 1.4em;
+            color: #d4a574;
+            margin-bottom: 40px;
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .message {
+            max-width: 700px;
+            font-size: 1.2em;
+            color: #e5d4bd;
+            line-height: 1.8;
+            margin-bottom: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(244, 212, 168, 0.2);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .photo-collage {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .photo-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            aspect-ratio: 1;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transform: rotate(var(--rotate));
+            transition: transform 0.3s ease;
+            border: 3px solid rgba(244, 212, 168, 0.3);
+        }
+
+        .photo-item:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 12px 30px rgba(244, 212, 168, 0.3);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .celebration-button {
+            margin-top: 40px;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            background: linear-gradient(135deg, #d4a574 0%, #e8c17e 100%);
+            color: #4a4520;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Lora', serif;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .celebration-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(244, 212, 168, 0.4);
+        }
+
+        .celebration-button:active {
+            transform: scale(0.95);
+        }
+
+        .hearts-background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .rotating-heart {
+            position: absolute;
+            font-size: 2em;
+            opacity: 0.15;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .subtitle {
+                font-size: 1.5em;
+            }
+
+            .date-location {
+                font-size: 1.1em;
+            }
+
+            .message {
+                font-size: 1em;
+                padding: 20px;
+            }
+
+            .photo-collage {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-background" id="heartsBackground"></div>
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <div class="main-content">
+        <h1>Happy 33rd Anniversary!</h1>
+
+        <div class="message">
+            <p>We hope you're enjoying your time in the Big Easy!</p>
+            <p style="margin-top: 15px;">Cheers to many more years of adventures together! 🥂</p>
+        </div>
+
+        <div class="photo-collage" id="photoCollage"></div>
+
+        <button class="celebration-button" onclick="celebrate()">Celebrate with Me! 🎊</button>
+    </div>
+
+    <script>
+        // Image list from the momanddad folder
+        const images = [
+            'assets/img/momanddad/IMG_3702.heic',
+            'assets/img/momanddad/IMG_3831.heic',
+            'assets/img/momanddad/IMG_4610.heic',
+            'assets/img/momanddad/IMG_4616.jpg',
+            'assets/img/momanddad/IMG_4783.HEIC'
+        ];
+
+        // Create photo collage
+        function createPhotoCollage() {
+            const collage = document.getElementById('photoCollage');
+            
+            images.forEach((img, index) => {
+                const item = document.createElement('div');
+                item.className = 'photo-item';
+                item.style.setProperty('--rotate', (Math.random() * 6 - 3) + 'deg');
+                item.style.animationDelay = (index * 0.1) + 's';
+                
+                const imgElement = document.createElement('img');
+                imgElement.src = img;
+                imgElement.alt = 'Memory ' + (index + 1);
+                imgElement.onerror = function() {
+                    // Fallback if image doesn't load
+                    item.style.backgroundColor = '#d4a574';
+                    item.style.display = 'flex';
+                    item.style.alignItems = 'center';
+                    item.style.justifyContent = 'center';
+                    item.style.fontSize = '2em';
+                    item.textContent = '💑';
+                };
+                
+                item.appendChild(imgElement);
+                collage.appendChild(item);
+            });
+        }
+
+        // Create floating background hearts
+        function createBackgroundHearts() {
+            const heartsBackground = document.getElementById('heartsBackground');
+            const heartCount = 8;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'rotating-heart';
+                heart.textContent = '💕';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.animationDuration = (15 + Math.random() * 10) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                
+                heartsBackground.appendChild(heart);
+            }
+        }
+
+        // Create champagne glass animations
+        function createChampagneGlasses() {
+            const container = document.body;
+            const glassCount = 6;
+            
+            for (let i = 0; i < glassCount; i++) {
+                const glass = document.createElement('div');
+                glass.className = 'champagne-glass';
+                glass.textContent = '🥂';
+                glass.style.left = Math.random() * 90 + 5 + '%';
+                glass.style.top = Math.random() * 80 + 10 + '%';
+                glass.style.animationDelay = (i * 0.3) + 's';
+                
+                container.appendChild(glass);
+            }
+        }
+
+        // Confetti animation
+        function createConfetti() {
+            const container = document.getElementById('confettiContainer');
+            const confettiPieces = 50;
+            const colors = ['#d4a574', '#e8c17e', '#f4d4a8', '#c9a461', '#FFD700'];
+            
+            for (let i = 0; i < confettiPieces; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.textContent = Math.random() > 0.5 ? '🎉' : '✨';
+                
+                const startX = Math.random() * window.innerWidth;
+                const duration = 2 + Math.random() * 1.5;
+                const delay = Math.random() * 0.5;
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 5 + Math.random() * 5;
+                
+                confetti.style.left = startX + 'px';
+                confetti.style.top = '-30px';
+                confetti.style.fontSize = (1 + Math.random() * 1.5) + 'em';
+                confetti.style.opacity = Math.random() * 0.7 + 0.3;
+                
+                container.appendChild(confetti);
+                
+                // Animate confetti falling
+                let y = -30;
+                let x = startX;
+                const startTime = Date.now();
+                
+                function animateConfetti() {
+                    const elapsed = (Date.now() - startTime) / 1000;
+                    
+                    if (elapsed < duration) {
+                        y = -30 + (elapsed / duration) * (window.innerHeight + 30);
+                        x = startX + Math.sin(elapsed * 3) * 50;
+                        
+                        confetti.style.left = x + 'px';
+                        confetti.style.top = y + 'px';
+                        confetti.style.opacity = Math.max(0, Math.random() * 0.7 + 0.3 - (elapsed / duration) * 0.5);
+                        
+                        requestAnimationFrame(animateConfetti);
+                    } else {
+                        confetti.remove();
+                    }
+                }
+                
+                animateConfetti();
+            }
+        }
+
+        // Celebrate button functionality
+        function celebrate() {
+            createConfetti();
+            // Create multiple bursts of confetti
+            setTimeout(() => createConfetti(), 300);
+            setTimeout(() => createConfetti(), 600);
+        }
+
+        // Initialize page
+        window.addEventListener('load', () => {
+            createPhotoCollage();
+            createBackgroundHearts();
+            createChampagneGlasses();
+            
+            // Auto-create confetti burst on page load
+            setTimeout(() => {
+                createConfetti();
+            }, 1000);
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            // Recalculate champagne glass positions if needed
+        });
+    </script>
+</body>
+</html>
