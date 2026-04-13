@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hot Takes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -231,6 +232,21 @@
             background-color: #ff3333;
             transform: scale(1.05);
         }
+
+        .card-title {
+            position: absolute;
+            top: 7%;
+            left: 0;
+            right: 0;
+            z-index: 3;
+            color: #cc0000;
+            font-family: 'Bebas Neue', 'Impact', sans-serif;
+            font-size: clamp(24px, 6vw, 36px);
+            font-weight: 700;
+            text-align: center;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9), 1px 1px 3px rgba(255, 51, 51, 0.5);
+            letter-spacing: 3px;
+        }
     </style>
 </head>
 <body>
@@ -247,6 +263,7 @@
 
     <div class="container">
         <div class="card-wrapper">
+            <div class="card-title">Hot Takes!</div>
             <div class="flames"></div>
             <div class="card-text" id="cardText"></div>
         </div>
