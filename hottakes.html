@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot Takes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #000000;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .card-wrapper {
+            width: 100%;
+            max-width: 350px;
+            aspect-ratio: 210 / 300;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to bottom,
+                #1a1a1a 0%,
+                #1a1a1a 20%,
+                #cc0000 22%,
+                #ff3333 35%,
+                #cc0000 45%,
+                #990000 65%,
+                #660000 85%,
+                #330000 100%
+            );
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 25%;
+            background: linear-gradient(to bottom, #1a1a1a, #1a1a1a 70%, transparent);
+            pointer-events: none;
+        }
+
+        .flames {
+            position: absolute;
+            top: 15%;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M 0 100 L 35 52 C 32 70 48 88 60 100 L 85 28 C 80 62 95 85 110 100 L 140 45 C 135 73 158 90 175 100 L 205 15 C 198 55 220 85 240 100 L 270 58 C 265 75 285 92 305 100 L 330 32 C 325 62 345 88 365 100 L 395 50 C 388 72 410 92 430 100 L 460 18 C 452 55 478 85 500 100 L 525 60 C 520 78 542 93 565 100 L 595 35 C 588 68 612 90 635 100 L 665 55 C 660 75 680 92 700 100 L 730 20 C 722 62 750 85 775 100 L 800 62 C 795 80 815 95 835 100 L 860 38 C 852 70 880 90 905 100 L 935 48 C 928 72 955 92 975 100 L 1000 100 L 1000 0 L 0 0 Z" fill="%23000000" stroke="none"/></svg>') repeat-x;
+            background-size: auto 100%;
+            pointer-events: none;
+        }
+
+        .card-text {
+            position: relative;
+            z-index: 2;
+            width: 85%;
+            text-align: center;
+            color: white;
+            font-size: clamp(14px, 5vw, 22px);
+            font-weight: 700;
+            line-height: 1.4;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 1px 1px 3px rgba(0, 0, 0, 0.6);
+            word-wrap: break-word;
+            max-height: 70%;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        button {
+            background-color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #667eea;
+            min-width: 80px;
+        }
+
+        button:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .counter {
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                gap: 20px;
+                padding: 10px;
+            }
+
+            .card-wrapper {
+                max-width: 280px;
+            }
+
+            .card-text {
+                font-size: clamp(12px, 4.5vw, 18px);
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 14px;
+                min-width: 70px;
+            }
+
+            .counter {
+                font-size: 14px;
+                min-width: 70px;
+            }
+        }
+
+        .about-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            color: #000;
+            transition: all 0.2s ease;
+        }
+
+        .about-btn:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.05);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            color: white;
+            border: 2px solid #cc0000;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 15px;
+            color: #ff3333;
+            font-size: 24px;
+        }
+
+        .modal-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .modal-close {
+            background-color: #cc0000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+            margin-top: 15px;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background-color: #ff3333;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <button class="about-btn" onclick="openAboutModal()">About</button>
+
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <h2>About Hot Takes</h2>
+            <p>This webpage is inspired by the Hot Takes card game and is created purely for fun and entertainment purposes.</p>
+            <p>It's an interactive way to browse through fun, quirky opinions and debate-worthy statements. Swipe through the takes, discuss with friends, and have a good time!</p>
+            <p>This is an unofficial fan creation and is not affiliated with the official Hot Takes game.</p>
+            <button class="modal-close" onclick="closeAboutModal()">Close</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card-wrapper">
+            <div class="flames"></div>
+            <div class="card-text" id="cardText"></div>
+        </div>
+
+        <div class="controls">
+            <button id="prevBtn" onclick="previousCard()">← Back</button>
+            <span class="counter"><span id="currentIndex">1</span> / 40</span>
+            <button id="nextBtn" onclick="nextCard()">Forward →</button>
+        </div>
+    </div>
+
+    <script>
+        const prompts = [
+            "Rap music is better than indie music",
+            "Baths are better than showers",
+            "I would rather live on a private island than a penthouse in my dream city",
+            "If time travel existed, then changing something from the past would change everything about the future",
+            "The smell of coffee is bad",
+            "ASMR videos are not relaxing",
+            "Of the three meals, breakfast is the best",
+            "Expiration dates on food are more of a suggestion than a rule",
+            "It'd be better to be deaf than blind",
+            "New York-style pizza is better than Chicago-style pizza",
+            "Nicolas Cage is not a bad actor",
+            "Budget airlines like Spirit® and Frontier™ aren't THAT bad",
+            "Veganism and vegan food will one day be just as popular as their animal-based counterparts",
+            "Teachers should not give homework",
+            "It's more rude to show up late than to show up underdressed",
+            "Military time is better than a.m. and p.m.",
+            "There will be a cure for cancer within our lifetime",
+            "Vaping is worse for you than smoking cigarettes",
+            "It's fair to ask the genie for infinite wishes",
+            "Cereal is a type of soup",
+            "Dentists are overdramatic about flossing",
+            "Netflix® is better than Hulu®",
+            "Biting your nails makes you a cannibal",
+            "Massages hurt you more than they relax you",
+            "People should get a ticket for leaving a shopping cart in the parking lot",
+            "I wouldn't mind living my life backward, Benjamin Button-style",
+            "The youngest child is always the favorite",
+            "GIF is pronounced \"jif\"",
+            "Living 100 years in the future would be better than living 100 years in the past",
+            "Movies are better than books",
+            "Our phones shouldn't be allowed to listen to us",
+            "Movies shouldn't be longer than two hours",
+            "We should stop doing daylight saving time",
+            "Kids should get an allowance",
+            "I'd rather go on a vacation to the mountains than the beach",
+            "You should wash your bedding once a week",
+            "New York is better than LA",
+            "\"Aunt\" is pronounced \"ah-nt\" not \"ant\"",
+            "Middle seat should get both armrests",
+            "I would rather know when I die than how I die"
+        ];
+
+        let currentIndex = 0;
+
+        function updateCard() {
+            const cardText = document.getElementById('cardText');
+            const currentIndexSpan = document.getElementById('currentIndex');
+
+            cardText.textContent = prompts[currentIndex];
+            currentIndexSpan.textContent = currentIndex + 1;
+        }
+
+        function nextCard() {
+            currentIndex = (currentIndex + 1) % prompts.length;
+            updateCard();
+        }
+
+        function previousCard() {
+            currentIndex = (currentIndex - 1 + prompts.length) % prompts.length;
+            updateCard();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextCard();
+            if (e.key === 'ArrowLeft') previousCard();
+        });
+
+        // Initialize
+        updateCard();
+
+        // Modal functions
+        function openAboutModal() {
+            document.getElementById('aboutModal').classList.add('show');
+        }
+
+        function closeAboutModal() {
+            document.getElementById('aboutModal').classList.remove('show');
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('aboutModal');
+            if (event.target == modal) {
+                closeAboutModal();
+            }
+        }
+    </script>
+</body>
+</html>
