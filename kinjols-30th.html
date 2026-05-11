@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 30th Birthday, Kinjol!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes:wght@400&family=Poppins:wght@300;400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #9ec99e 0%, #c8e6c9 50%, #d9ead9 100%);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating penguin bubbles */
+        .bubble-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            pointer-events: none;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .bubble::before {
+            content: '🐧';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5em;
+            animation: bobble 2s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px);
+            }
+            50% {
+                transform: translateY(-30px) translateX(20px);
+            }
+        }
+
+        @keyframes bobble {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        .main-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 50px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4em;
+            color: #2d5016;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #558b2f;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .number-30 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 6em;
+            color: #7cb342;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+            margin: 20px 0;
+            animation: scaleIn 0.8s ease-out 0.3s both;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .penguin-gif-container {
+            margin: 40px auto;
+            position: relative;
+            animation: slideUp 0.8s ease-out 0.5s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .penguin-gif {
+            width: 300px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .penguin-gif:hover {
+            transform: scale(1.05);
+        }
+
+        .celebration-text {
+            max-width: 700px;
+            margin: 40px auto;
+            animation: fadeIn 1s ease-out 0.7s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .celebration-text p {
+            font-size: 1.2em;
+            color: #33691e;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .special-features {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 50px auto;
+            max-width: 900px;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 200px;
+            animation: popIn 0.6s ease-out;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .feature:nth-child(1) { animation-delay: 0.8s; }
+        .feature:nth-child(2) { animation-delay: 1s; }
+        .feature:nth-child(3) { animation-delay: 1.2s; }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 1.3em;
+            color: #558b2f;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .feature-text {
+            color: #33691e;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .matcha-divider {
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #7cb342, transparent);
+            margin: 40px auto;
+        }
+
+        .footer-message {
+            font-size: 1.1em;
+            color: #558b2f;
+            font-style: italic;
+            margin-top: 50px;
+            font-weight: 300;
+        }
+
+        .penguin-friends {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            font-size: 3em;
+            animation: fadeIn 1s ease-out 1.4s both;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .number-30 {
+                font-size: 4em;
+            }
+
+            .penguin-gif {
+                width: 250px;
+            }
+
+            .special-features {
+                gap: 20px;
+            }
+
+            .celebration-text p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .number-30 {
+                font-size: 3em;
+            }
+
+            .penguin-gif {
+                width: 200px;
+            }
+
+            .subtitle {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bubble-container"></div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Happy 30th Birthday, Kinjol!</h1>
+        </div>
+
+        <div class="penguin-gif-container">
+            <img src="https://media.giphy.com/media/eoaJH5ZHVGr7MXsg7w/giphy.gif" alt="Cute Pudgy Penguin" class="penguin-gif">
+        </div>
+
+        <div class="celebration-text">
+            <p>Here's to celebrating you and an exciting new decade!</p>
+        </div>
+
+    </div>
+
+    <script>
+        // Create floating penguin bubbles
+        function createBubbles() {
+            const container = document.querySelector('.bubble-container');
+            const bubbleCount = 6;
+
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                
+                const size = Math.random() * 60 + 40;
+                const left = Math.random() * 100;
+                const delay = Math.random() * 2;
+                const duration = Math.random() * 5 + 8;
+
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                bubble.style.left = left + '%';
+                bubble.style.top = '-' + size + 'px';
+                bubble.style.animationDelay = delay + 's';
+                bubble.style.animationDuration = duration + 's';
+
+                container.appendChild(bubble);
+            }
+        }
+
+        // Initialize bubbles when page loads
+        window.addEventListener('load', createBubbles);
+
+        // Add some confetti-like effect on click
+        document.addEventListener('click', function(e) {
+            const penguin = document.createElement('img');
+            penguin.src = 'https://media.tenor.com/tUKWCijP5ZkAAAAj/pengu-pudgy.gif';
+            penguin.style.position = 'fixed';
+            penguin.style.left = (e.clientX - 30) + 'px';
+            penguin.style.top = (e.clientY - 30) + 'px';
+            penguin.style.pointerEvents = 'none';
+            penguin.style.width = '60px';
+            penguin.style.height = '60px';
+            penguin.style.zIndex = '9999';
+            penguin.style.animation = 'floatAway 2.5s ease-out forwards';
+
+            document.body.appendChild(penguin);
+
+            setTimeout(() => penguin.remove(), 2500);
+        });
+
+        // Add animation for click-triggered penguins
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatAway {
+                to {
+                    transform: translateY(-100px) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
