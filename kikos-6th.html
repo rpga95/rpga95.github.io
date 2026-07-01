@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 6th Birthday, Kiko!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes:wght@400&family=Playfair+Display:wght@700&family=Lora:wght@400;600&display=swap');
+
+        :root {
+            --cream: #fff8ee;
+            --rose: #ffdfeb;
+            --pink: #ffb4c8;
+            --pink-dark: #e07b99;
+            --lavender: #d7c9ff;
+            --sage: #a7c7a0;
+            --ink: #4b3b3f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Lora', serif;
+            color: var(--ink);
+            background: linear-gradient(135deg, #fff3f7 0%, #ffe8d0 30%, #f9f1ff 100%);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '🐾';
+            position: fixed;
+            inset: 0;
+            font-size: 8rem;
+            opacity: 0.08;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: rotate(-12deg);
+        }
+
+        .confetti-container {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            top: -10vh;
+            width: 10px;
+            height: 16px;
+            border-radius: 2px;
+            opacity: 0.95;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translate3d(0, -10vh, 0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate3d(var(--drift), 110vh, 0) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .card {
+            position: relative;
+            z-index: 2;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 36px 24px 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px solid rgba(224, 123, 153, 0.28);
+            border-radius: 28px;
+            padding: 28px 30px;
+            box-shadow: 0 20px 45px rgba(116, 70, 94, 0.15);
+            backdrop-filter: blur(8px);
+            margin-bottom: 24px;
+            max-width: 760px;
+        }
+
+        .eyebrow {
+            font-size: 0.95rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--pink-dark);
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.4rem, 5vw, 3.7rem);
+            color: var(--pink-dark);
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.05rem, 2vw, 1.35rem);
+            color: #85515d;
+            font-weight: 700;
+        }
+
+        .gallery {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .featured-photo,
+        .photo-frame {
+            overflow: hidden;
+            border-radius: 18px;
+            box-shadow: 0 8px 20px rgba(89, 57, 73, 0.12);
+        }
+
+        .featured-photo img,
+        .photo-frame img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            border-radius: 18px;
+            background: transparent;
+        }
+
+        .featured-photo {
+            width: min(100%, 560px);
+        }
+
+        .featured-photo img {
+            min-height: 240px;
+            max-height: 400px;
+        }
+
+        .photo-strip {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            width: min(100%, 640px);
+        }
+
+        .photo-frame {
+            aspect-ratio: 1;
+            min-height: 0;
+            max-width: 180px;
+            justify-self: center;
+            transform: rotate(var(--tilt, 0deg));
+        }
+
+        .message {
+            max-width: 760px;
+            padding: 22px 26px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.75);
+            box-shadow: 0 12px 30px rgba(89, 57, 73, 0.12);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 22px;
+        }
+
+        .message strong {
+            color: var(--pink-dark);
+        }
+
+
+        @media (max-width: 860px) {
+            .featured-photo img {
+                min-height: 270px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .card {
+                padding: 24px 14px 34px;
+            }
+
+            .header {
+                padding: 20px 18px;
+            }
+
+            .message {
+                padding: 18px 18px;
+                font-size: 0.98rem;
+            }
+
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <main class="card">
+        <section class="header">
+            <p class="eyebrow">Happy 6th Birthday</p>
+            <h1>Kiko</h1>
+        </section>
+
+        <section class="gallery">
+            <div class="featured-photo">
+                <img src="assets/img/kikos-6th/kiko-party.PNG" alt="Kiko celebrating with a party setup">
+            </div>
+            <div class="photo-strip">
+                <div class="photo-frame" style="--tilt: -5deg;">
+                    <img src="assets/img/kikos-6th/kiko-facetime.PNG" alt="Kiko on a facetime call">
+                </div>
+                <div class="photo-frame" style="--tilt: 4deg;">
+                    <img src="assets/img/kikos-6th/kiko-judgy.JPEG" alt="Kiko looking adorably judgmental">
+                </div>
+                <div class="photo-frame" style="--tilt: -3deg;">
+                    <img src="assets/img/kikos-6th/kiko-heart.PNG" alt="Kiko with a heart motif">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const confettiContainer = document.getElementById('confettiContainer');
+
+        function createConfetti() {
+            const colors = ['#ff8fba', '#ffd166', '#a7c7a0', '#d7c9ff', '#ffb4c8', '#fff4c2'];
+            const pieces = 46;
+
+            for (let i = 0; i < pieces; i += 1) {
+                const piece = document.createElement('span');
+                piece.className = 'confetti-piece';
+                piece.style.left = `${Math.random() * 100}%`;
+                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.width = `${6 + Math.random() * 8}px`;
+                piece.style.height = `${10 + Math.random() * 10}px`;
+                piece.style.setProperty('--drift', `${(Math.random() - 0.5) * 220}px`);
+                piece.style.animationDuration = `${3.5 + Math.random() * 2.5}s`;
+                piece.style.animationDelay = `${Math.random() * 0.2}s`;
+                confettiContainer.appendChild(piece);
+                setTimeout(() => piece.remove(), 7000);
+            }
+        }
+
+        function playPsspss() {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContextClass) {
+                return;
+            }
+
+            const audioContext = new AudioContextClass();
+            const now = audioContext.currentTime;
+            const master = audioContext.createGain();
+            master.gain.setValueAtTime(0.0001, now);
+            master.gain.exponentialRampToValueAtTime(0.03, now + 0.02);
+            master.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+            master.connect(audioContext.destination);
+
+            const oscillator = audioContext.createOscillator();
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(820, now);
+            oscillator.frequency.exponentialRampToValueAtTime(990, now + 0.06);
+            oscillator.frequency.exponentialRampToValueAtTime(760, now + 0.12);
+            oscillator.connect(master);
+            oscillator.start(now);
+            oscillator.stop(now + 0.14);
+
+            const chirp = audioContext.createOscillator();
+            chirp.type = 'triangle';
+            chirp.frequency.setValueAtTime(500, now + 0.05);
+            chirp.frequency.exponentialRampToValueAtTime(650, now + 0.12);
+            chirp.connect(master);
+            chirp.start(now + 0.05);
+            chirp.stop(now + 0.16);
+
+            setTimeout(() => audioContext.close(), 400);
+        }
+
+        document.addEventListener('click', () => {
+            playPsspss();
+        });
+
+        createConfetti();
+        setInterval(createConfetti, 650);
+    </script>
+</body>
+</html>
