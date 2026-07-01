@@ -148,25 +148,26 @@
         }
 
         .featured-photo {
-            width: min(100%, 560px);
+            width: min(100%, 420px);
         }
 
         .featured-photo img {
-            min-height: 240px;
-            max-height: 400px;
+            min-height: 180px;
+            max-height: 300px;
         }
 
         .photo-strip {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 10px;
-            width: min(100%, 640px);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
+            width: min(100%, 500px);
+            justify-content: center;
         }
 
         .photo-frame {
             aspect-ratio: 1;
             min-height: 0;
-            max-width: 180px;
+            max-width: 220px;
             justify-self: center;
             transform: rotate(var(--tilt, 0deg));
         }
@@ -235,6 +236,9 @@
                 </div>
                 <div class="photo-frame" style="--tilt: -3deg;">
                     <img src="assets/img/kikos-6th/kiko-heart.PNG" alt="Kiko with a heart motif">
+                </div>
+                <div class="photo-frame" style="--tilt: 3deg;">
+                    <img src="assets/img/kikos-6th/kiko-salute.PNG" alt="Kiko giving a salute">
                 </div>
             </div>
         </section>
